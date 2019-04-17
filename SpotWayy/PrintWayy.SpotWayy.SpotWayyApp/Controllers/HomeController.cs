@@ -388,6 +388,6 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
             return PartialView("_Album",teste);
         }
                
-        
+        //teste
     }
 }
