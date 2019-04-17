@@ -1,0 +1,58 @@
+﻿@model IEnumerable<PrintWayy.SpotWayy.SpotWayyApp.Models.MusicModel>
+@{
+    var cont = 0;    
+}
+
+<div class="containerMusic">
+    <button id="btnAddMusic" class="btnAddMusic">Adicionar Música</button>
+
+    <table>
+        <tr>
+            <th>                
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayName("Operações")
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {  
+            <tr>
+                <td>                    
+                    @Html.DisplayFor(listItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(listItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(listItem => item.Duration)
+                </td>
+                <td>
+                    @if (item.IdMusic == 0)
+                    {
+                        cont++;
+                        <img src="~/Content/icons/lapis_icon.png" class="iconAlter" />                        
+                        <button class="btnEditMusic" data-id-music="@cont" data-id-album="@item.IdAlbum" data-indicator-flag="new">Editar</button>
+                        <img src="~/Content/icons/lixeira_icon.png" class="iconDelete" />                        
+                        <button class="btnDeleteMusic" data-id-music="@cont" data-id-album="@item.IdAlbum" data-indicator-flag="new">Excluir</button>
+                    }
+                    else
+                    {
+                        <img src="~/Content/icons/lapis_icon.png" class="iconAlter" />
+                        <button class="btnEditMusic" data-id-music="@item.IdMusic" data-id-album="@item.IdAlbum" data-indicator-flag="old">Editar</button>
+                        <img src="~/Content/icons/lixeira_icon.png" class="iconDelete" />                        
+                        <button class="btnDeleteMusic" data-id-music="@item.IdMusic" data-id-album="@item.IdAlbum" data-indicator-flag="old">Excluir</button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+       

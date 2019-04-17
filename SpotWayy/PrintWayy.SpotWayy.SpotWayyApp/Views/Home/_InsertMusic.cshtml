@@ -1,0 +1,32 @@
+﻿@model PrintWayy.SpotWayy.SpotWayyApp.Models.MusicModel
+
+
+<div class="Modal">
+    <div class="header-AddMusicModal">
+        <h1>Detalhes da música</h1>
+        <button id="btnCloseModal" class="btnCloseModalMusic" onclick="CloseModal('AddMusicModal')">X</button>
+    </div>
+    <div class="container-AddMusicModal">
+        @using (Html.BeginForm("InsertMusic", "Home"))
+        {
+            @Html.HiddenFor(model => model.IdAlbum)
+
+            <div class="row">
+                @Html.LabelFor(x => x.Title):
+                @Html.EditorFor(x => x.Title)
+            </div>
+            <div class="row">
+                @Html.LabelFor(x => x.Genre):
+                @Html.EditorFor(x => x.Genre)
+            </div>
+            <div class="row">
+                @Html.LabelFor(x => x.Duration):
+                @Html.EditorFor(x => x.Duration)
+            </div>
+            <div class="footer-AddMusicModal">
+                <input type="submit" value="Salvar" class="btnSalvarModal" />
+                <input type="button" value="Cancelar" class="btnCancelModal" onclick="CloseModal('AddMusicModal')"/>                
+            </div>
+        }
+    </div>
+</div>

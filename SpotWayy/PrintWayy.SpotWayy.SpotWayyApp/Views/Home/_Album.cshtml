@@ -1,0 +1,22 @@
+﻿@model IEnumerable<PrintWayy.SpotWayy.SpotWayyApp.Models.AlbumModel>
+@{var cont = 1;}
+
+@foreach (var item in Model)
+{
+    <div class="cardAlbum-col-@cont">
+        <div class="titleAlbum">
+            @Html.DisplayFor(modelItem => item.Title)
+        </div>
+        <img src="~/Content/upload/@item.IdImage" alt="" class="imgAlbum" />
+        <div class="operationsAlbum">
+            @Html.ActionLink("Editar", "UpdateAlbum", new { id = item.IdAlbum })
+            <button class="btnOpenModalAlbum" data-album-id="@item.IdAlbum">Excluir</button>
+        </div>
+    </div>
+
+    cont++;
+    if (cont == 5)
+    {
+        cont = 1;
+    }
+}

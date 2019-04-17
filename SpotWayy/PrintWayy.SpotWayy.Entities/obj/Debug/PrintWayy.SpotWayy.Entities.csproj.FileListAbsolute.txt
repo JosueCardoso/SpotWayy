@@ -1,0 +1,5 @@
+C:\SpotWayy\SpotWayy\PrintWayy.SpotWayy.Entities\bin\Debug\PrintWayy.SpotWayy.Entities.dll
+C:\SpotWayy\SpotWayy\PrintWayy.SpotWayy.Entities\bin\Debug\PrintWayy.SpotWayy.Entities.pdb
+C:\SpotWayy\SpotWayy\PrintWayy.SpotWayy.Entities\obj\Debug\PrintWayy.SpotWayy.Entities.csprojResolveAssemblyReference.cache
+C:\SpotWayy\SpotWayy\PrintWayy.SpotWayy.Entities\obj\Debug\PrintWayy.SpotWayy.Entities.dll
+C:\SpotWayy\SpotWayy\PrintWayy.SpotWayy.Entities\obj\Debug\PrintWayy.SpotWayy.Entities.pdb

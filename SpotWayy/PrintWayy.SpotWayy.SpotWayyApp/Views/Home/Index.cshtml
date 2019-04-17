@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Style.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>   
+    
+    <title>SpotWayy</title>
+</head>
+<body>
+    <header class="header">
+        @Html.ActionLink("Adicionar Álbum", "Insert")
+
+        <div class="inputBox">
+            <img class="inputIcon" src="~/Content/icons/lupa_icon.png" />
+            <input class="inputText" type="text" id="inputSearch" />
+        </div>
+    </header>
+
+    <div class="containerHome">
+        @Html.Action("ShowAllAlbum")        
+    </div>
+
+    <div class="DeleteAlbumModal"></div>
+    
+    <script src="~/Scripts/Effects.js" type="text/javascript"></script>
+</body>
+</html>
+

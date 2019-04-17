@@ -1,0 +1,68 @@
+﻿@model PrintWayy.SpotWayy.SpotWayyApp.Models.AlbumModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Style.css" rel="stylesheet" type="text/css"/>
+    <script src="~/Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+    
+    <title>Insert</title>
+</head>
+<body>
+    <div class="containerAlbum">
+        <div class="container-col-1">
+
+            @using (Html.BeginForm("InsertAlbum", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(model => model.IdAlbum)
+                
+                @Html.LabelFor(model => model.Title)
+                @Html.EditorFor(model => model.Title)
+
+                @Html.LabelFor(model => model.IdImage)
+                <input type="file" name="file" id="file"/>
+               
+
+                <div class="containerButtons">
+                    <input type="submit" class="btnSave" value="Salvar" id="btnSaveAlbum" />
+                    @Html.ActionLink("Cancelar", "Index")
+                </div>
+
+            }
+        </div>
+        <div class="container-col-2">
+            @{if (Model.IdImage==(null))
+            {
+                <img src="~/Content/upload/noImage.jpg" alt="" class="imgAlbum" id="imagePreview" />
+            }
+              else
+              {
+                <img src="~/Content/upload/@Model.IdImage" alt="" class="imgAlbum" id="imagePreview" />
+              }}
+
+        </div>
+    </div>
+
+    @{TempData["idAlbum"] = Model.IdAlbum;}
+
+    @Html.Action("ShowMusic", new { id = Model.IdAlbum })
+    
+
+    <div class="AddMusicModal">></div>
+    <div class="UpdateMusicModal"></div>
+    <div class="DeleteMusicModal"></div>
+    
+    
+    @*@Html.Action("ShowInsertMusic", new { id = Model.IdAlbum })*@
+    @*@Html.Action("ShowUpdateMusic", new { id = Model.IdAlbum })
+    @Html.Action("ShowDeleteMusic", new { id = Model.IdAlbum })*@
+
+        <script src="~/Scripts/Effects.js"></script>
+
+</body>
+
+
+
+</html>

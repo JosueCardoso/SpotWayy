@@ -1,0 +1,19 @@
+﻿    <div class="Modal">
+        <div class="header-DeleteAlbumModal">
+            <h1>Confirmação de exclusão</h1>
+            <button class="btnCloseModal" onclick="CloseModal('DeleteAlbumModal')">X</button>
+        </div>
+        <div class="container-DeleteAlbumModal">
+            @using (Html.BeginForm("DeleteConfirmedAlbum", "Home"))
+            {
+                <p>Para confirmar a exclusão digite EXCLUIR no campo abaixo</p>
+                <input type="text" class="inputModal" name="Delete" />
+                <div class="footer-DeleteAlbumModal">
+                    <input type="submit" value="Confirmar" class="btnDeleteModal" />
+                    <button class="btnCancelModal" onclick="CloseModal('DeleteAlbumModal')">Cancelar</button>
+                </div>
+            }
+        </div>
+    </div>
+
+

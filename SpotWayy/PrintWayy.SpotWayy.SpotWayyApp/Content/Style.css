@@ -1,0 +1,459 @@
+﻿body {
+    margin:0;
+    padding:0;
+}
+
+/*Header*/
+.header{
+    margin:30px 15px 30px 15px;
+}
+
+.header a{
+    text-decoration:none;
+    padding:8px 20px;
+    border:solid 1px #000;
+    font-family:sans-serif;
+    font-size:15px;
+}
+
+.inputBox{       
+    float:right;
+    border:solid 1px #000;
+    vertical-align:middle;
+}
+
+.inputIcon{      
+    width:15px;
+    padding-left:10px;  
+    margin-bottom:-3px;
+}
+
+.inputText{
+    height:15px;
+    padding:5px;
+    border:none;
+    font-size:15px; 
+    outline:none; 
+}
+
+
+/* Home*/
+.containerHome {
+    padding: 0;
+    margin: 0 15px 30px 15px;
+    display: grid; 
+    justify-content:space-around;        
+}
+
+.cardAlbum-col-1{
+    -ms-grid-column: 1;
+     grid-column: 1;
+}
+
+.cardAlbum-col-2{
+    -ms-grid-column: 2;
+     grid-column: 2;
+}
+
+.cardAlbum-col-3{
+    -ms-grid-column: 3;
+     grid-column: 3;
+}
+
+.cardAlbum-col-4{
+    -ms-grid-column: 4;
+     grid-column: 4;
+}
+
+.cardAlbum-col-1,.cardAlbum-col-2,.cardAlbum-col-3,.cardAlbum-col-4 {
+    width: 150px;
+    display: grid;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 15px;  
+    margin-bottom: 50px;    
+}
+
+.titleAlbum {
+    border: solid 1px #000;
+    border-bottom: none;
+    padding: 5px;
+    height: 15px;
+    width: 140px;
+    -ms-word-break: break-all;
+    word-break: break-all;
+}
+
+.imgAlbum{
+    width:150px;
+    border:solid 1px #000;
+    height:150px;
+}
+
+.operationsAlbum a,.btnOpenModalAlbum{
+    border:solid 1px #000;
+    text-decoration:none;
+    color:#000; 
+    padding:5px 16px;   
+    margin:-2px;    
+    background-color:#fff;    
+    font-size:15px;
+    cursor:pointer;
+}
+
+
+/*Modal Delete*/
+.DeleteAlbumModal{
+    justify-content:center;
+    align-content:center;
+    display:none;    
+    position:fixed;
+    width:100%;
+    height:100%;    
+    top:0;
+    left:0;
+}
+
+.DeleteAlbumModal .Modal{    
+    justify-content:center;
+    align-items:center;    
+    width:350px;
+    height:190px;
+    border-radius:5px;
+    box-shadow:0 0 5px 1px #6E6E6E;
+    position:absolute;
+    top:40%;
+    background-color:#fff;
+}
+
+.header-DeleteAlbumModal{
+    font-family:sans-serif;    
+    display:flex;
+    border-bottom:solid 1px #E6E6E6;    
+}
+
+.header-DeleteAlbumModal h1{
+    font-size:15px;
+    padding:10px;
+    margin:0;    
+}
+
+.btnCloseModal{ 
+   margin-left:118px;      
+   background-color:transparent;
+   border:none;   
+   outline:none;
+   font-size:large; 
+}
+
+.btnCloseModal:hover{
+    text-shadow: 0 0 4px red;
+    color:red;
+}
+
+.container-DeleteAlbumModal{
+    padding:10px;
+}
+
+.container-DeleteAlbumModal p{
+    margin:0 0 10px 0;
+    font-family:sans-serif;
+    font-size:15px;
+}
+
+.inputModal{
+    margin-bottom:20px;
+    width:100%;
+    border:groove;
+}
+
+.footer-DeleteAlbumModal{
+   border-top:solid 1px #E6E6E6;
+   padding-top: 10px;   
+   text-align:right;
+}
+
+.btnDeleteModal{
+    padding:10px;
+    background-color:#4000FF;
+    color:#fff;
+    border:none;
+    box-shadow: 0 0 10px 1px #A4A4A4;
+}
+
+.btnDeleteModal:hover{
+    box-shadow: 0 0 10px 3px #A4A4A4;
+}
+
+.btnCancelModal{
+    padding:10px;
+    background-color:red;
+    color:#fff;
+    border:none;
+    box-shadow: 0 0 10px 1px #A4A4A4;
+}
+
+.btnCancelModal:hover{
+    box-shadow: 0 0 10px 3px #A4A4A4;
+}
+
+/*Inserir Álbum*/
+.containerAlbum{
+    display:flex;
+    margin:30px 15px;
+}
+
+.container-col-1 form{
+  display:grid;    
+}
+
+.container-col-1{
+    width:400px
+}
+.container-col-2{
+    margin-left:50px;
+}
+
+.container-col-1 label {
+    -ms-grid-column: 1;
+    grid-column: 1;
+    font-family:sans-serif;
+}
+
+.container-col-1 input {
+    -ms-grid-column: 2;
+    grid-column: 2; 
+    width:244px;  
+    font-size:15px; 
+    margin-bottom:15px;
+}
+
+.containerButtons input,.containerButtons a{
+    padding:5px 30px;
+    border:solid 1px #A4A4A4;
+    background-color:#fff;
+    font-family:sans-serif;
+    font-size:15px;
+    width:122px;
+    box-shadow: 0 0 10px 0 #c2c2c2;
+    cursor:pointer;
+}
+
+.containerButtons a{
+      text-decoration:none;
+}
+
+.containerButtons input:hover,.containerButtons a:hover{
+    box-shadow: 0 0 10px 1px #A4A4A4;
+}
+
+.containerButtons{
+    -ms-grid-column: 2;
+    grid-column: 2; 
+}
+
+/*Inserir/Alterar música*/
+.AddMusicModal,.UpdateMusicModal{
+    justify-content:center;
+    align-content:center;
+    display:none;    
+    position:fixed;
+    width:100%;
+    height:100%;    
+    top:0;
+    left:0;
+}
+
+.AddMusicModal .Modal,.UpdateMusicModal .Modal{        
+    justify-content:center;
+    align-items:center;    
+    width:350px;
+    height:200px;
+    border-radius:5px;
+    box-shadow:0 0 5px 1px #6E6E6E;
+    position:absolute;
+    background-color:#fff;
+    top:40%;    
+}
+
+.header-AddMusicModal{
+    font-family:sans-serif;        
+    display:flex;
+    padding:10px;
+    border-bottom:solid 1px #E6E6E6; 
+}
+
+.header-AddMusicModal h1{
+    margin:0;
+    font-size:15px;
+    width:100%;
+}
+
+.btnCloseModalMusic{
+    background-color:transparent;
+    border:none;
+    font-size:large;
+    outline:none;
+}
+
+.btnCloseModalMusic:hover{
+    text-shadow: 0 0 4px red;
+    color:red;
+}
+
+.container-AddMusicModal{
+    padding:10px;
+    text-align:right;
+}
+
+.container-AddMusicModal label{
+    width:10%;
+    font-family:sans-serif;
+    font-size:15px;
+}
+
+.text-box{
+    width:250px;
+    margin-bottom:10px;
+}
+
+.footer-AddMusicModal{    
+    border-top:solid 1px #E6E6E6; 
+    padding:10px 0;
+    text-align:right;
+}
+
+.btnSalvarModal{
+    padding:10px 15px;
+    background-color:#4000FF;
+    color:#fff;
+    border:none;
+    box-shadow: 0 0 10px 1px #A4A4A4;
+}
+
+.btnSalvarModal:hover{
+    box-shadow: 0 0 10px 3px #A4A4A4;
+}
+
+
+/*Excluir música*/
+.DeleteMusicModal{
+    justify-content:center;
+    align-content:center;
+    display:none;    
+    position:fixed;
+    width:100%;
+    height:100%;    
+    top:0;
+    left:0;
+}
+
+.DeleteMusicModal .Modal{    
+    justify-content:center;
+    align-items:center;    
+    width:350px;
+    height:190px;
+    border-radius:5px;
+    box-shadow:0 0 5px 1px #6E6E6E;
+    position:absolute;
+    top:40%;
+    background-color:#fff;
+}
+
+.header-DeleteMusicModal{
+    display:flex;
+    padding:10px;
+    border-bottom:solid 1px  #E6E6E6;
+}
+
+.header-DeleteMusicModal h1{
+    font-family:sans-serif;
+    font-size:15px;
+    width:100%;
+    margin:0;
+}
+
+.header-DeleteMusicModal button{
+    margin:0;
+}
+
+.container-DeleteMusicModal{
+    padding:10px;
+}
+
+.container-DeleteMusicModal p{
+    margin:0 0 10px 0;
+    font-family:sans-serif;
+    font-size:15px;
+}
+
+.footer-DeleteMusicModal{
+   border-top:solid 1px #E6E6E6;
+   padding-top: 10px;   
+   text-align:right;
+}
+
+/*Tabela Música*/
+
+.containerMusic{
+    margin:15px;
+}
+
+.btnAddMusic{
+    padding:5px 30px;
+    border:solid 1px #A4A4A4;
+    background-color:#fff;
+    font-family:sans-serif;
+    font-size:15px;    
+    box-shadow: 0 0 10px 0 #c2c2c2;
+    cursor:pointer;
+    margin-bottom:15px;
+}
+
+.btnAddMusic:hover{
+    box-shadow: 0 0 10px 1px #A4A4A4;
+}
+
+.containerMusic table{
+    border-spacing:0;
+    border-collapse:collapse;
+    width:100%;
+}
+
+.containerMusic tr th,td{
+    border:solid 1px #000;  
+    padding:5px;
+    text-align:center;    
+    font-family:sans-serif;
+    font-size:15px;
+}
+
+.btnEditMusic,.btnDeleteMusic{
+    border:none;
+    background-color:transparent;
+    cursor:pointer;
+    font-size:15px;   
+     
+}
+
+.iconAlter{
+    width:20px;
+}
+
+.iconDelete{
+    width:20px;
+    margin-left:20px;
+}
+
+.containerMusic tr:nth-child(even){
+    background-color:#fff;    
+}
+
+.containerMusic tr:nth-child(odd){
+    background-color:#eee;    
+}
+
+.containerMusic tr th{
+    background-color:#A4A4A4;
+    color:#fff;        
+}

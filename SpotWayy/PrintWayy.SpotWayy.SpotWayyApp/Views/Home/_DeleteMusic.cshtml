@@ -1,0 +1,21 @@
+﻿@model PrintWayy.SpotWayy.SpotWayyApp.Models.MusicModel
+
+    <div class="Modal">
+        <div class="header-DeleteMusicModal">
+            <h1>Confirmação de exclusão</h1>
+            <button class="btnCloseModal" onclick="CloseModal('DeleteMusicModal')">X</button>
+        </div>
+        <div class="container-DeleteMusicModal">
+            @using (Html.BeginForm("DeleteConfirmedMusic", "Home"))
+            {
+                @Html.HiddenFor(model => model.IdAlbum)
+                @Html.HiddenFor(model => model.IdMusic)
+                <p>Para confirmar a exclusão digite EXCLUIR no campo abaixo</p>
+                <input type="text" class="inputModal" name="Delete" />
+                <div class="footer-DeleteMusicModal">
+                    <input type="submit" value="Confirmar" class="btnDeleteModal" />
+                    <input type="button" value="Cancelar" class="btnCancelModal" onclick="CloseModal('DeleteMusicModal')" />
+                </div>
+            }
+        </div>
+    </div>
