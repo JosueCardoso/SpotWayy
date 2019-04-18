@@ -357,23 +357,14 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
             var listMusicModel = listMusicBD.Select(Mapper.Map<Music, MusicModel>);
 
             //Adiciona na lista da view as músicas em álbuns novos
-            foreach (var item in listMusicAdd)
-            {
-                list.Add(item);
-            }
+            list.AddRange(listMusicAdd);  
 
             //Adiciona na lista da view as músicas que estavam no banco
-            foreach (var item in listMusicModel)
-            {
-                list.Add(item);
-            }
-
+            list.AddRange(listMusicModel);
+            
             //Adiciona na lista da view as músicas que estão na lista de cache de update
-            foreach (var item in listMusicUpdate)
-            {
-                list.Add(item);
-            }
-
+            list.AddRange(listMusicUpdate);
+            
             return list;
         }
 
