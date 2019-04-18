@@ -14,29 +14,44 @@ namespace PrintWayy.SpotWayy.DAO
 
         //Método de inserção
         public void Insert(Music music)
-        {
-            var strQuery = "";
-            strQuery += "INSERT INTO TBMUSIC(Title,Genre,Duration,Id_Album) ";
-            strQuery += string.Format("VALUES ('{0}','{1}','{2}',{3})",
-                music.Title,music.Genre,music.Duration,music.IdAlbum);
+        {            
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            var strQuery = @"INSERT INTO TBMUSIC(Title,Genre,Duration,Id_Album) VALUES(@Title,@Genre,@Duration,@Id_Album)";
+            var title = new SqlParameter("Title",music.Title);
+            var genre = new SqlParameter("Genre",music.Genre);
+            var duration = new SqlParameter("Duration",music.Duration);
+            var idAlbum = new SqlParameter("Id_Album",music.IdAlbum);
+
+            parameters.Add(title);
+            parameters.Add(genre);
+            parameters.Add(duration);
+            parameters.Add(idAlbum);
 
             using(connection = new Connection()){
-                connection.ExecuteQry(strQuery);
+                connection.ExecuteQry(strQuery,parameters);
             }
         }
 
         //Método de alteração
         public void Update(Music music)
-        {
-            var strQuery = "";
-            strQuery += "UPDATE TBMUSIC SET ";
-            strQuery += string.Format("Title='{0}',",music.Title);
-            strQuery += string.Format("Genre='{0}',",music.Genre);
-            strQuery += string.Format("Duration='{0}' ", music.Duration);
-            strQuery += string.Format(" WHERE Id_Music={0}", music.IdMusic);
+        {           
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            var strQuery = @"UPDATE TBMUSIC SET Title=@Title,Genre=@Genre,Duration=@Duration WHERE Id_Music=@Id_Music";
+            var title = new SqlParameter("Title", music.Title);
+            var genre = new SqlParameter("Genre", music.Genre);
+            var duration = new SqlParameter("Duration", music.Duration);            
+            var idMusic = new SqlParameter("Id_Music",music.IdMusic);
+
+            parameters.Add(title);
+            parameters.Add(genre);
+            parameters.Add(duration);
+            parameters.Add(idMusic);
+
 
             using(connection = new Connection()){
-                connection.ExecuteQry(strQuery);
+                connection.ExecuteQry(strQuery,parameters);
             }           
         }
 
@@ -44,11 +59,15 @@ namespace PrintWayy.SpotWayy.DAO
         public void Delete(int id)
         {
             using (connection = new Connection())
-            {
-                var strQuery = "";
-                strQuery += "DELETE FROM TBMUSIC ";
-                strQuery += string.Format("WHERE Id_Music={0}", id);
-                connection.ExecuteQry(strQuery);
+            {                
+                List<SqlParameter> parameters = new List<SqlParameter>();
+
+                var strQuery = @"DELETE FROM TBMUSIC WHERE Id_Music=@Id_Music";
+                var id_Music = new SqlParameter("Id_Music",id);
+
+                parameters.Add(id_Music);                
+                
+                connection.ExecuteQry(strQuery,parameters);
             }
         }
 
@@ -59,8 +78,9 @@ namespace PrintWayy.SpotWayy.DAO
 
             using (connection = new Connection())
             {
-                var strQuery = "SELECT * FROM TBMUSIC";
-                SqlDataReader reader = connection.ExecuteSelect(strQuery);
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                var strQuery = @"SELECT * FROM TBMUSIC";
+                SqlDataReader reader = connection.ExecuteSelect(strQuery,parameters);
 
                 while (reader.Read())
                 {
@@ -85,8 +105,14 @@ namespace PrintWayy.SpotWayy.DAO
             using (connection = new Connection())
             {
                 var music = new Music();
-                var strQuery = string.Format("SELECT * FROM TBMUSIC WHERE Id_Music={0}",id);
-                SqlDataReader reader = connection.ExecuteSelect(strQuery);
+                List<SqlParameter> parameters = new List<SqlParameter>();
+               
+                var strQuery = @"SELECT * FROM TBMUSIC WHERE Id_Music=@Id_Music";
+                var idMusic = new SqlParameter("Id_Music",id);
+
+                parameters.Add(idMusic);
+
+                SqlDataReader reader = connection.ExecuteSelect(strQuery,parameters);
 
                 while (reader.Read())
                 {
@@ -105,13 +131,17 @@ namespace PrintWayy.SpotWayy.DAO
         public List<Music> GetForAlbum(int id)
         {
             var listMusic = new List<Music>();
+                       
+            List<SqlParameter> parameters = new List<SqlParameter>();
 
-            var strQuery = "";
-            strQuery += string.Format("SELECT * FROM TBMUSIC WHERE Id_Album={0}",id);
+            var strQuery = @"SELECT * FROM TBMUSIC WHERE Id_Album=@Id_Album";
+            var idAlbum = new SqlParameter("Id_Album",id);
+
+            parameters.Add(idAlbum);
 
             using (connection = new Connection())
             {
-                SqlDataReader reader = connection.ExecuteSelect(strQuery);
+                SqlDataReader reader = connection.ExecuteSelect(strQuery,parameters);
 
                 while (reader.Read())
                 {

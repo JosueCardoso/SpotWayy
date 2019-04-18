@@ -22,16 +22,20 @@ namespace PrintWayy.SpotWayy.DAO
         }
 
         //Executar query sem retorno
-        public void ExecuteQry(string query)
+        public void ExecuteQry(string query, List<SqlParameter> parameters)
         {
             var commandQry = new SqlCommand(query, myConnection);
+            commandQry.Parameters.AddRange(parameters.ToArray());
+            
             commandQry.ExecuteNonQuery();
         }
 
         //Executar query com retorno
-        public SqlDataReader ExecuteSelect(string query)
+        public SqlDataReader ExecuteSelect(string query, List<SqlParameter> parameters)
         {
             var commandQry = new SqlCommand(query, myConnection);
+            commandQry.Parameters.AddRange(parameters.ToArray());
+            
             return commandQry.ExecuteReader();
         }
 

@@ -14,31 +14,41 @@ namespace PrintWayy.SpotWayy.DAO
 
         //Método de Inserção
         public void Insert(Album album)
-        {
-            var strQuery = "";
-            strQuery += "INSERT INTO TBALBUM(Title,Id_Image)";
-            strQuery += string.Format(" VALUES ('{0}','{1}')",
-                album.Title,album.IdImage);
+        {            
+            //lista de parametros para criar o SqlCommand para proteger os valores de sqlinjection
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            
+            var strQuery = @"INSERT INTO TBALBUM(Title,Id_Image) VALUES (@Title,@Id_Image)";
+            var title = new SqlParameter("Title", album.Title);
+            var id_Image = new SqlParameter("Id_Image", album.IdImage);
+
+            parameters.Add(title);
+            parameters.Add(id_Image);
 
             //Using para encerrar a conexão assim que executar a query
             using (connection = new Connection())
             {
-                connection.ExecuteQry(strQuery);
+                connection.ExecuteQry(strQuery,parameters);
             }
         }
 
         //Método de Alteração
         public void Update(Album album)
         {
-            var strQuery = "";
-            strQuery += "UPDATE TBALBUM SET ";
-            strQuery += string.Format("Title='{0}',",album.Title);
-            strQuery += string.Format("Id_Image='{0}' ", album.IdImage);
-            strQuery += string.Format(" WHERE Id_Album={0}",album.IdAlbum);
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            var strQuery = @"UPDATE TBALBUM SET Title=@Title,Id_Image=@Id_Image WHERE Id_Album=@Id_Album";
+            var title = new SqlParameter("Title", album.Title);
+            var id_Image = new SqlParameter("Id_Image", album.IdImage);
+            var id_Album = new SqlParameter("Id_Album",album.IdAlbum);
+
+            parameters.Add(title);
+            parameters.Add(id_Image);
+            parameters.Add(id_Album);
 
             using (connection = new Connection())
             {
-                connection.ExecuteQry(strQuery);
+                connection.ExecuteQry(strQuery,parameters);
             }
         }
 
@@ -47,10 +57,14 @@ namespace PrintWayy.SpotWayy.DAO
         {
             using (connection = new Connection())
             {
-                var strQuery = "";
-                strQuery += "DELETE FROM TBALBUM ";
-                strQuery += string.Format(" WHERE Id_Album={0}", id);
-                connection.ExecuteQry(strQuery);
+                List<SqlParameter> parameters = new List<SqlParameter>();
+
+                var strQuery = @"DELETE FROM TBALBUM WHERE Id_Album=@Id_Album";                
+                var id_Album = new SqlParameter("Id_Album", id);
+
+                parameters.Add(id_Album);
+
+                connection.ExecuteQry(strQuery,parameters);
             }
             
         }
@@ -62,8 +76,9 @@ namespace PrintWayy.SpotWayy.DAO
 
             using (connection = new Connection())
             {
-                var strQuery = "SELECT * FROM TBALBUM";
-                SqlDataReader reader = connection.ExecuteSelect(strQuery);
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                var strQuery = @"SELECT * FROM TBALBUM";
+                SqlDataReader reader = connection.ExecuteSelect(strQuery,parameters);
 
                 while (reader.Read())
                 {
@@ -86,8 +101,14 @@ namespace PrintWayy.SpotWayy.DAO
             using (connection = new Connection())
             {
                 var album = new Album();
-                var strQuery = string.Format("SELECT * FROM TBALBUM WHERE Id_Album={0}", id);
-                SqlDataReader reader = connection.ExecuteSelect(strQuery);
+                List<SqlParameter> parameters = new List<SqlParameter>();
+
+                var strQuery = @"SELECT * FROM TBALBUM WHERE Id_Album=@Id_Album";
+                var idAlbum = new SqlParameter("Id_Album",id);
+
+                parameters.Add(idAlbum);
+
+                SqlDataReader reader = connection.ExecuteSelect(strQuery,parameters);
 
                 while (reader.Read())
                 {
@@ -104,11 +125,12 @@ namespace PrintWayy.SpotWayy.DAO
         {
             int lastId = 0;
 
-            var strQuery = "SELECT MAX(Id_Album) FROM TBALBUM";
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            var strQuery = @"SELECT MAX(Id_Album) FROM TBALBUM";
 
             using (connection = new Connection())
             {
-                SqlDataReader reader = connection.ExecuteSelect(strQuery);
+                SqlDataReader reader = connection.ExecuteSelect(strQuery,parameters);
 
                 reader.Read();
 
