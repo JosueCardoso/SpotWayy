@@ -16,7 +16,7 @@
 
             @using (Html.BeginForm("InsertAlbum", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                @Html.HiddenFor(model => model.IdAlbum)
+                @Html.HiddenFor(model => model.Id)
                 
                 @Html.LabelFor(model => model.Title)
                 @Html.EditorFor(model => model.Title)
@@ -45,21 +45,16 @@
         </div>
     </div>
 
-    @{TempData["idAlbum"] = Model.IdAlbum;}
+    @{TempData["idAlbum"] = Model.Id;}
 
-    @Html.Action("ShowMusic", new { id = Model.IdAlbum })
+    @Html.Action("ShowMusic", new { id = Model.Id })
     
 
     <div class="AddMusicModal">></div>
     <div class="UpdateMusicModal"></div>
     <div class="DeleteMusicModal"></div>
-    
-    
-    @*@Html.Action("ShowInsertMusic", new { id = Model.IdAlbum })*@
-    @*@Html.Action("ShowUpdateMusic", new { id = Model.IdAlbum })
-    @Html.Action("ShowDeleteMusic", new { id = Model.IdAlbum })*@
-
-        <script src="~/Scripts/Effects.js"></script>
+   
+    <script src="~/Scripts/Effects.js"></script>
 
 </body>
 

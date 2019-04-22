@@ -13,7 +13,7 @@ namespace PrintWayy.SpotWayy.DAO
         private Connection connection;
 
         //Método de inserção
-        public void Insert(Music music)
+        public void Insert(MusicVO music)
         {            
             List<SqlParameter> parameters = new List<SqlParameter>();
 
@@ -34,7 +34,7 @@ namespace PrintWayy.SpotWayy.DAO
         }
 
         //Método de alteração
-        public void Update(Music music)
+        public void Update(MusicVO music)
         {           
             List<SqlParameter> parameters = new List<SqlParameter>();
 
@@ -42,7 +42,7 @@ namespace PrintWayy.SpotWayy.DAO
             var title = new SqlParameter("Title", music.Title);
             var genre = new SqlParameter("Genre", music.Genre);
             var duration = new SqlParameter("Duration", music.Duration);            
-            var idMusic = new SqlParameter("Id_Music",music.IdMusic);
+            var idMusic = new SqlParameter("Id_Music",music.Id);
 
             parameters.Add(title);
             parameters.Add(genre);
@@ -72,9 +72,9 @@ namespace PrintWayy.SpotWayy.DAO
         }
 
         //Selecionar todos os registros
-        public List<Music> GetAllMusic()
+        public List<MusicVO> GetAllMusic()
         {
-            var listMusic = new List<Music>();
+            var listMusic = new List<MusicVO>();
 
             using (connection = new Connection())
             {
@@ -84,9 +84,9 @@ namespace PrintWayy.SpotWayy.DAO
 
                 while (reader.Read())
                 {
-                    var music = new Music
+                    var music = new MusicVO
                     {
-                        IdMusic = int.Parse(reader["Id_Music"].ToString()),
+                        Id = int.Parse(reader["Id_Music"].ToString()),
                         Title = reader["Title"].ToString(),
                         Genre = reader["Genre"].ToString(),
                         Duration = reader["Duration"].ToString(),
@@ -100,11 +100,11 @@ namespace PrintWayy.SpotWayy.DAO
         }
 
         //Selecionar apenas por id
-        public Music GetForId(int id)
+        public MusicVO GetForId(int id)
         {
             using (connection = new Connection())
             {
-                var music = new Music();
+                var music = new MusicVO();
                 List<SqlParameter> parameters = new List<SqlParameter>();
                
                 var strQuery = @"SELECT * FROM TBMUSIC WHERE Id_Music=@Id_Music";
@@ -116,7 +116,7 @@ namespace PrintWayy.SpotWayy.DAO
 
                 while (reader.Read())
                 {
-                    music.IdMusic = int.Parse(reader["Id_Music"].ToString());
+                    music.Id = int.Parse(reader["Id_Music"].ToString());
                     music.Title = reader["Title"].ToString();
                     music.Genre = reader["Genre"].ToString();
                     music.Duration = reader["Duration"].ToString();
@@ -128,9 +128,9 @@ namespace PrintWayy.SpotWayy.DAO
         }
 
 
-        public List<Music> GetForAlbum(int id)
+        public List<MusicVO> GetForAlbum(int id)
         {
-            var listMusic = new List<Music>();
+            var listMusic = new List<MusicVO>();
                        
             List<SqlParameter> parameters = new List<SqlParameter>();
 
@@ -145,9 +145,9 @@ namespace PrintWayy.SpotWayy.DAO
 
                 while (reader.Read())
                 {
-                    var music = new Music
+                    var music = new MusicVO
                     {
-                        IdMusic = int.Parse(reader["Id_Music"].ToString()),
+                        Id = int.Parse(reader["Id_Music"].ToString()),
                         Title = reader["Title"].ToString(),
                         Genre = reader["Genre"].ToString(),
                         Duration = reader["Duration"].ToString(),

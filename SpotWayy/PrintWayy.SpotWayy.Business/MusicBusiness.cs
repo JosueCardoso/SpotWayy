@@ -12,7 +12,7 @@ namespace PrintWayy.SpotWayy.Business
     {
         private MusicRepository _musicRepository = new MusicRepository();
 
-        public void Insert(Music music)
+        public void Insert(MusicVO music)
         {
             _musicRepository.Insert(music);
         }
@@ -22,22 +22,22 @@ namespace PrintWayy.SpotWayy.Business
             _musicRepository.Delete(id);
         }
 
-        public void Update(Music music)
+        public void Update(MusicVO music)
         {
             _musicRepository.Update(music);
         }
 
-        public Music GetForId(int id)
+        public MusicVO GetForId(int id)
         {
             return _musicRepository.GetForId(id);
         }
 
-        public List<Music> GetAllMusic()
+        public List<MusicVO> GetAllMusic()
         {
             return _musicRepository.GetAllMusic();
         }
 
-        public List<Music> GetForAlbum(int id)
+        public List<MusicVO> GetForAlbum(int id)
         {
             return _musicRepository.GetForAlbum(id);
         }

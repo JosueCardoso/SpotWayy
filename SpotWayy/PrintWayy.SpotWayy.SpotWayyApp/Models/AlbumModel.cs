@@ -8,7 +8,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Models
 {
     public class AlbumModel
     {
-        public int IdAlbum { get; set; }
+        public int Id { get; set; }
 
         [DisplayName("Título do álbum:")]
         public string Title { get; set; }

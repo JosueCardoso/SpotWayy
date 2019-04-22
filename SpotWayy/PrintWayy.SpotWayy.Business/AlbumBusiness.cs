@@ -12,7 +12,7 @@ namespace PrintWayy.SpotWayy.Business
     {
         private AlbumRepository _albumRepository = new AlbumRepository();
 
-        public void Insert(Album album)
+        public void Insert(AlbumVO album)
         {
             _albumRepository.Insert(album);
         }
@@ -22,17 +22,17 @@ namespace PrintWayy.SpotWayy.Business
             _albumRepository.Delete(id);
         }
 
-        public void Update(Album album)
+        public void Update(AlbumVO album)
         {
             _albumRepository.Update(album);
         }
 
-        public Album GetForId(int id)
+        public AlbumVO GetForId(int id)
         {
             return _albumRepository.GetForId(id);
         }
 
-        public List<Album> GetAllAlbum()
+        public List<AlbumVO> GetAllAlbum()
         {
             return _albumRepository.GetAllAlbum();
         }

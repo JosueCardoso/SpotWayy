@@ -13,7 +13,7 @@ namespace PrintWayy.SpotWayy.DAO
         private Connection connection;
 
         //Método de Inserção
-        public void Insert(Album album)
+        public void Insert(AlbumVO album)
         {            
             //lista de parametros para criar o SqlCommand para proteger os valores de sqlinjection
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -33,14 +33,14 @@ namespace PrintWayy.SpotWayy.DAO
         }
 
         //Método de Alteração
-        public void Update(Album album)
+        public void Update(AlbumVO album)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
 
             var strQuery = @"UPDATE TBALBUM SET Title=@Title,Id_Image=@Id_Image WHERE Id_Album=@Id_Album";
             var title = new SqlParameter("Title", album.Title);
             var id_Image = new SqlParameter("Id_Image", album.IdImage);
-            var id_Album = new SqlParameter("Id_Album",album.IdAlbum);
+            var id_Album = new SqlParameter("Id_Album",album.Id);
 
             parameters.Add(title);
             parameters.Add(id_Image);
@@ -70,9 +70,9 @@ namespace PrintWayy.SpotWayy.DAO
         }
 
         //Selecionar todos os registros
-        public List<Album> GetAllAlbum()
+        public List<AlbumVO> GetAllAlbum()
         {
-            var listAlbum = new List<Album>();
+            var listAlbum = new List<AlbumVO>();
 
             using (connection = new Connection())
             {
@@ -82,9 +82,9 @@ namespace PrintWayy.SpotWayy.DAO
 
                 while (reader.Read())
                 {
-                    var album = new Album
+                    var album = new AlbumVO
                     {
-                        IdAlbum=int.Parse(reader["Id_Album"].ToString()),
+                        Id=int.Parse(reader["Id_Album"].ToString()),
                         Title = reader["Title"].ToString(),
                         IdImage = reader["Id_Image"].ToString()
                     };
@@ -96,11 +96,11 @@ namespace PrintWayy.SpotWayy.DAO
         }
 
         //Selecionar os registros apenas por id
-        public Album GetForId(int id)
+        public AlbumVO GetForId(int id)
         {
             using (connection = new Connection())
             {
-                var album = new Album();
+                var album = new AlbumVO();
                 List<SqlParameter> parameters = new List<SqlParameter>();
 
                 var strQuery = @"SELECT * FROM TBALBUM WHERE Id_Album=@Id_Album";
@@ -112,7 +112,7 @@ namespace PrintWayy.SpotWayy.DAO
 
                 while (reader.Read())
                 {
-                    album.IdAlbum = int.Parse(reader["Id_Album"].ToString());
+                    album.Id = int.Parse(reader["Id_Album"].ToString());
                     album.Title = reader["Title"].ToString();
                     album.IdImage = reader["Id_Image"].ToString();
                 }

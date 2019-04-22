@@ -35,7 +35,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         {
             var musicModel = new MusicModel()
             {
-                IdAlbum=id
+                Id=id
             };
             return PartialView("_InsertMusic",musicModel);
         }        
@@ -61,7 +61,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
                 else
                 {
                     var music = musicBusiness.GetForId(idMusic);
-                    musicModel = Mapper.Map<Music, MusicModel>(music);
+                    musicModel = Mapper.Map<MusicVO, MusicModel>(music);
                 }
             }              
 
@@ -78,7 +78,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
             var musicModel = new MusicModel()
             {
                 IdAlbum = idAlbum,
-                IdMusic = idMusic,
+                Id = idMusic,
             };
             
             return PartialView("_DeleteMusic",musicModel);
@@ -97,7 +97,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         {
             //Buscando todos os albuns do banco e mapeando para AlbumModel
             var listAlbum = albumBusiness.GetAllAlbum();
-            var listAlbumView = listAlbum.Select(Mapper.Map<Album, AlbumModel>);
+            var listAlbumView = listAlbum.Select(Mapper.Map<AlbumVO, AlbumModel>);
 
             listAlbumCache.Clear();
 
@@ -114,9 +114,9 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         }
 
         //Abre o PartialView de excluir album
-        public ActionResult ShowDeleteAlbum(int Id)
+        public ActionResult ShowDeleteAlbum(int id)
         {
-            TempData["IdDeleteAlbum"] = Id;
+            TempData["IdDeleteAlbum"] = id;
             return PartialView("_DeleteAlbum");
         }
 
@@ -133,8 +133,8 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         //Muda de página para insert
         public ActionResult Insert()
         {
-            var album = new Album();
-            var albumView = Mapper.Map<Album, AlbumModel>(album);
+            var album = new AlbumVO();
+            var albumView = Mapper.Map<AlbumVO, AlbumModel>(album);
            
             return View(albumView);
         }
@@ -154,7 +154,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
                 //Se o nome da imagem ultrapassar de 30 digitos, é colocado apenas (titulo do album)_cover.(extensão) como nome da imagem
                 if (fileName.Length > 30)
                 {
-                    fileName = string.Format("_cover"+file.FileName.Substring((file.FileName.Length-4),4));                    
+                    fileName = string.Format(albumModelView.Id+"_cover"+file.FileName.Substring((file.FileName.Length-4),4));                    
                 }
                 string path = Path.Combine(Server.MapPath("~/Content/upload"), Path.GetFileName(fileName));
                 file.SaveAs(path);
@@ -162,7 +162,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
             else
             {
                 //caso não tenha valor mas o album existe no banco, utiliza o nome que está salvo no banco
-                if (albumModelView.IdAlbum != 0)
+                if (albumModelView.Id != 0)
                 {
                     fileName = nameImage;
                 }
@@ -177,26 +177,26 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
             {
                 Title = albumModelView.Title,
                 IdImage = fileName,    
-                IdAlbum = albumModelView.IdAlbum
+                Id = albumModelView.Id
             };
                      
-            var album = Mapper.Map<AlbumModel, Album>(albumModel);
+            var album = Mapper.Map<AlbumModel, AlbumVO>(albumModel);
 
             //Objeto Hidden que pega o Id do album está causando ModelState Invalid
             ModelState.Remove("IdAlbum");
             if (ModelState.IsValid)
             {
                 //Se idAlbum == 0 deve dar insert, senão update
-                if (albumModelView.IdAlbum == 0)
+                if (albumModelView.Id == 0)
                 {
                     albumBusiness.Insert(album);
-                    InsertMusicBD(listMusicAdd,album.IdAlbum);
+                    InsertMusicBD(listMusicAdd,album.Id);
                     listMusicAdd.Clear();
                 }
                 else
                 {
                     albumBusiness.Update(album);
-                    InsertMusicBD(listMusicUpdate,album.IdAlbum);
+                    InsertMusicBD(listMusicUpdate,album.Id);
                     listMusicUpdate.Clear();
                 }
             }
@@ -213,7 +213,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
             var albumForId = albumBusiness.GetForId(id);
 
             nameImage = albumForId.IdImage;
-            var albumForUpdate = Mapper.Map<Album,AlbumModel>(albumForId);            
+            var albumForUpdate = Mapper.Map<AlbumVO,AlbumModel>(albumForId);            
 
             return View("Insert",albumForUpdate);
         }     
@@ -238,7 +238,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (musicModel.IdAlbum == 0)
+                if (musicModel.Id == 0)
                 {
                     listMusicAdd.Add(musicModel);
                 }
@@ -256,7 +256,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         {           
             int idMusicDeleteMusic = Convert.ToInt32(TempData["idMusicDeleteMusic"]);
             var typedText = Request["Delete"].ToString().ToLower();
-            var idAlbumDeleteMusic = musicView.IdAlbum;
+            var idAlbumDeleteMusic = musicView.Id;
             var indicatorFlag = TempData["indicatorFlag"];
 
             //Verifica se foi digitado excluir no campo de texto
@@ -291,7 +291,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         public ActionResult UpdateConfirmedMusic(MusicModel musicView)
         {
             int idMusicUpdate = Convert.ToInt32(TempData["IdMusicUpdate"]);
-            var idAlbumUpdateMusic = musicView.IdAlbum;
+            var idAlbumUpdateMusic = musicView.Id;
             var indicatorFlag = TempData["IndicatorFlag"];
             
 
@@ -310,8 +310,8 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
                 }
                 else
                 {
-                    var music = Mapper.Map<MusicModel, Music>(musicView);
-                    music.IdMusic = idMusicUpdate;
+                    var music = Mapper.Map<MusicModel, MusicVO>(musicView);
+                    music.Id = idMusicUpdate;
                     musicBusiness.Update(music);                    
                 }
             }
@@ -323,7 +323,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         //*******Métodos Auxiliares********//
 
         //Inserir as músicas que estão nas listas cache no banco
-        private void InsertMusicBD(List<MusicModel> list,int idAlbum)
+        private void InsertMusicBD(List<MusicModel> musicList,int idAlbum)
         { 
             if (idAlbum == 0)
             {
@@ -332,11 +332,11 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
             }
 
             //Percorre a lista de musica de cache para inserir no banco
-            foreach (var item in list)
+            foreach (var item in musicList)
             {
-                var music = new Music()
+                var music = new MusicVO()
                 {
-                    IdMusic = item.IdMusic,
+                    Id = item.Id,
                     IdAlbum = idAlbum,
                     Title = item.Title,
                     Duration = item.Duration,
@@ -350,35 +350,34 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         //Concatenar todas as listas de cache numa lista só
         private List<MusicModel> ConcatenateList(int id)
         {
-            List<MusicModel> list = new List<MusicModel>();
+            List<MusicModel> MusicModellist = new List<MusicModel>();
 
             //Busca no banco músicas relacionadas com o id do album e mapeia para MusicModel
             var listMusicBD = new MusicBusiness().GetForAlbum(id);
-            var listMusicModel = listMusicBD.Select(Mapper.Map<Music, MusicModel>);
+            var listMusicModel = listMusicBD.Select(Mapper.Map<MusicVO, MusicModel>);
 
             //Adiciona na lista da view as músicas em álbuns novos
-            list.AddRange(listMusicAdd);  
+            MusicModellist.AddRange(listMusicAdd);  
 
             //Adiciona na lista da view as músicas que estavam no banco
-            list.AddRange(listMusicModel);
+            MusicModellist.AddRange(listMusicModel);
             
             //Adiciona na lista da view as músicas que estão na lista de cache de update
-            list.AddRange(listMusicUpdate);
+            MusicModellist.AddRange(listMusicUpdate);
             
-            return list;
+            return MusicModellist;
         }
 
         //Busca os álbuns no banco
         public ActionResult IndexSearch(string filter)
         {
-            List<AlbumModel> teste = new List<AlbumModel>();
+            List<AlbumModel> albumsFoundList = new List<AlbumModel>();
             var filterLower=filter.ToLower();
            
-            teste=(listAlbumCache.FindAll(x => x.Title.ToLower().Contains(filterLower)));    
+            albumsFoundList=(listAlbumCache.FindAll(x => x.Title.ToLower().Contains(filterLower)));    
 
-            return PartialView("_Album",teste);
-        }
-               
-        //teste
+            return PartialView("_Album",albumsFoundList);
+        }               
+        
     }
 }

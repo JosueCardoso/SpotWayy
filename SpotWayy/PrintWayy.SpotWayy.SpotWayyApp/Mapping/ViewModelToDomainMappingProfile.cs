@@ -12,8 +12,8 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Mapping
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<AlbumModel, Album>();
-            Mapper.CreateMap<MusicModel, Music>();
+            Mapper.CreateMap<AlbumModel, AlbumVO>();
+            Mapper.CreateMap<MusicModel, MusicVO>();
         }
     }
 }

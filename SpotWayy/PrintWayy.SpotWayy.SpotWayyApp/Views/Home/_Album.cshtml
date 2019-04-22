@@ -9,8 +9,8 @@
         </div>
         <img src="~/Content/upload/@item.IdImage" alt="" class="imgAlbum" />
         <div class="operationsAlbum">
-            @Html.ActionLink("Editar", "UpdateAlbum", new { id = item.IdAlbum })
-            <button class="btnOpenModalAlbum" data-album-id="@item.IdAlbum">Excluir</button>
+            @Html.ActionLink("Editar", "UpdateAlbum", new { id = item.Id })
+            <button class="btnOpenModalAlbum" data-album-id="@item.Id">Excluir</button>
         </div>
     </div>
 

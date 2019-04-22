@@ -9,7 +9,7 @@
             @using (Html.BeginForm("DeleteConfirmedMusic", "Home"))
             {
                 @Html.HiddenFor(model => model.IdAlbum)
-                @Html.HiddenFor(model => model.IdMusic)
+                @Html.HiddenFor(model => model.Id)
                 <p>Para confirmar a exclusão digite EXCLUIR no campo abaixo</p>
                 <input type="text" class="inputModal" name="Delete" />
                 <div class="footer-DeleteMusicModal">
