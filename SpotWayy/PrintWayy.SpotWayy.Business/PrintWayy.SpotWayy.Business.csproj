@@ -39,8 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlbumBusiness.cs" />
-    <Compile Include="MusicBusiness.cs" />
+    <Compile Include="AlbumServiceImpl.cs" />
+    <Compile Include="MusicServiceImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

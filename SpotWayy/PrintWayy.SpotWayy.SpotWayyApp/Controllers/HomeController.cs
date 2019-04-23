@@ -24,7 +24,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
 
         //business
         private AlbumBusiness albumBusiness = new AlbumBusiness();
-        private MusicBusiness musicBusiness = new MusicBusiness();
+        private MusicServiceImpl musicBusiness = new MusicServiceImpl();
 
         private static string nameImage;
 
@@ -351,7 +351,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
             List<MusicModel> MusicModellist = new List<MusicModel>();
 
             //Busca no banco músicas relacionadas com o id do album e mapeia para MusicModel
-            var listMusicBD = new MusicBusiness().GetForAlbum(id);
+            var listMusicBD = new MusicServiceImpl().GetForAlbum(id);
             var listMusicModel = listMusicBD.Select(Mapper.Map<MusicVO, MusicModel>);
 
             //Adiciona na lista da view as músicas em álbuns novos
