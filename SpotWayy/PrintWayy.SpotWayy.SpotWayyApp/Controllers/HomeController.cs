@@ -99,12 +99,10 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
             var listAlbum = albumBusiness.GetAllAlbum();
             var listAlbumView = listAlbum.Select(Mapper.Map<AlbumVO, AlbumModel>);
 
-            listAlbumCache.Clear();
+            listAlbumCache.Clear();            
 
-            foreach (var item in listAlbumView)
-            {
-                listAlbumCache.Add(item);
-            }
+            //Adicionando a lista de albuns do banco na lista de cache
+            listAlbumCache.AddRange(listAlbumView);
 
             //Limpando as listas de cache
             listMusicAdd.Clear();
@@ -332,18 +330,18 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
             }
 
             //Percorre a lista de musica de cache para inserir no banco
-            foreach (var item in musicList)
+            foreach (var music in musicList)
             {
-                var music = new MusicVO()
+                var musicVO = new MusicVO()
                 {
-                    Id = item.Id,
+                    Id = music.Id,
                     IdAlbum = idAlbum,
-                    Title = item.Title,
-                    Duration = item.Duration,
-                    Genre = item.Genre
+                    Title = music.Title,
+                    Duration = music.Duration,
+                    Genre = music.Genre
                 };
 
-                musicBusiness.Insert(music);
+                musicBusiness.Insert(musicVO);
             }            
         }
 
