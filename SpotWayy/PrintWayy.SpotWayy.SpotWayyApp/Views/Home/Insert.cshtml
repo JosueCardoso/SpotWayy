@@ -17,6 +17,7 @@
             @using (Html.BeginForm("InsertAlbum", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.HiddenFor(model => model.Id)
+                <input type="hidden" id="IdAlbum" value="@Model.Id"/>
                 
                 @Html.LabelFor(model => model.Title)
                 @Html.EditorFor(model => model.Title)

@@ -35,7 +35,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         {
             var musicModel = new MusicModel()
             {
-                Id=id
+                IdAlbum=id
             };
             return PartialView("_InsertMusic",musicModel);
         }        
@@ -236,7 +236,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (musicModel.Id == 0)
+                if (musicModel.IdAlbum == 0)
                 {
                     listMusicAdd.Add(musicModel);
                 }
@@ -254,7 +254,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         {           
             int idMusicDeleteMusic = Convert.ToInt32(TempData["idMusicDeleteMusic"]);
             var typedText = Request["Delete"].ToString().ToLower();
-            var idAlbumDeleteMusic = musicView.Id;
+            var idAlbumDeleteMusic = musicView.IdAlbum;
             var indicatorFlag = TempData["indicatorFlag"];
 
             //Verifica se foi digitado excluir no campo de texto
@@ -289,7 +289,7 @@ namespace PrintWayy.SpotWayy.SpotWayyApp.Controllers
         public ActionResult UpdateConfirmedMusic(MusicModel musicView)
         {
             int idMusicUpdate = Convert.ToInt32(TempData["IdMusicUpdate"]);
-            var idAlbumUpdateMusic = musicView.Id;
+            var idAlbumUpdateMusic = musicView.IdAlbum;
             var indicatorFlag = TempData["IndicatorFlag"];
             
 

@@ -67,14 +67,14 @@
 
 
 //Abre modal para o updateMusic e deleteMusic
-function OpenModalMusic(modal, IdMusic, idAlbum, indicatorFlag, url) {
+function OpenModalMusic(modal, idMusic, idAlbum, indicatorFlag, url) {
     $.ajax(
 {
     type: 'GET',
     url: url,
     dataType: 'html',
     cache: false,
-    data: { idMusic: IdMusic, idAlbum: idAlbum, indicatorFlag: indicatorFlag },
+    data: { idMusic: idMusic, idAlbum: idAlbum, indicatorFlag: indicatorFlag },
     async: true,
     success: function (divTarget) {
         $('.' + modal).html(divTarget);
@@ -84,14 +84,14 @@ function OpenModalMusic(modal, IdMusic, idAlbum, indicatorFlag, url) {
 }
 
 //Abre modal genérico
-function OpenModal(modal, Id, url) {
+function OpenModal(modal, id, url) {
     $.ajax(
 {
     type: 'GET',
     url: url,
     dataType: 'html',
     cache: false,
-    data: { Id: Id },
+    data: { Id: id },
     async: true,
     success: function (divTarget) {
         $('.' + modal).html(divTarget);

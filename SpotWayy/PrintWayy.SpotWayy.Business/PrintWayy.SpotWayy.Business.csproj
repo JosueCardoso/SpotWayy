@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlbumServiceImpl.cs" />
+    <Compile Include="IAlbumService.cs" />
+    <Compile Include="IMusicService.cs" />
     <Compile Include="MusicServiceImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
